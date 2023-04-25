@@ -1,0 +1,16 @@
+
+
+.inside-menu-button{
+    cursor:pointer;
+    width:5rem;
+    height:2rem;
+    margin:1rem;
+    border-radius:5px;
+    box-shadow: grey 9px 7px 4px 0px;
+    transition-property: all;
+    transition-duration: 1s;
+}
+
+.inside-menu-button:hover{
+    text-decoration: underline;
+}
