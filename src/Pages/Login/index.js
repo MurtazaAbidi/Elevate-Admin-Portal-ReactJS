@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import "../index.css";
+import axios from "axios";
 <link
   href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap"
   ref="stylesheet"
@@ -25,12 +26,32 @@ const Login = ({ setJWTAuthentication }) => {
     setIsSubmit(true);
     if (Object.keys(validate(formValues)).length === 0) {
 
-      if (formValues.email==='admin@gmail.com'&&formValues.password==='admin123'){
-        setJWTAuthentication(true)
-      }else{
-        alert('Wrong Email or Password')
-      }
-      
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/api/admin/login`,
+          {
+            email: formValues.email,
+            password: formValues.password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            withCredentials:true,
+          }
+        )
+        .then(function (response) {
+          console.log(response);
+          if (response.status === 200) {
+            setJWTAuthentication(true);
+            // console.warn (response.data)
+          }
+        })
+        .catch(function (error) {
+          console.log(error.response.data.msg);
+          alert(error.response.data.msg)
+        });
     }
     // if (formValues.email==='admin@gmail.com' && formValues.password==='admin123') setJWTAuthentication(true)
   };
