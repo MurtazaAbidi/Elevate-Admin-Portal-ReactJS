@@ -17,7 +17,8 @@ const NewCampaignRequest = () => {
   const [reasonModalOpen, setReasonModalOpen] = useState(false);
   const [rejectionReasonData, setRejectionReasonData] = useState([])
   const [loading, setLoading] = useState(false);
-
+  const [selectedItemReject, setSelectedItemReject] = useState(null)
+  const [done, setDone] = useState([])
 
   const categories = allCategories;
 
@@ -25,7 +26,7 @@ const NewCampaignRequest = () => {
     setLoading(true);
     axios.get(
       // body: JSON.stringify({
-      `${process.env.REACT_APP_API_URL}/api/admin/campaignrequests`,
+      `${process.env.REACT_APP_API_URL}/api/admin/newcampaignrequests`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +60,7 @@ const NewCampaignRequest = () => {
   };
   return (
     <>
-      {reasonModalOpen && <ReasonModal rejectionReasonData={rejectionReasonData} setRejectionReasonData={setRejectionReasonData} setReasonModalOpen={setReasonModalOpen} />}
+      {reasonModalOpen && <ReasonModal done={done} setDone={setDone} selectedItemReject={selectedItemReject} rejectionReasonData={rejectionReasonData} setRejectionReasonData={setRejectionReasonData} setReasonModalOpen={setReasonModalOpen} />}
       {modalOpen && <Modal setOpenModal={setModalOpen} dataForModal={dataForModal} setDataForModal={setDataForModal}/>}
       <div className="myProduct-body">
         <main>
@@ -74,7 +75,7 @@ const NewCampaignRequest = () => {
               activeCategory={activeCategory}
               filterItems={filterItems}
             />
-            <Menu items={menuItems} setReasonModalOpen={setReasonModalOpen} setModalOpen={setModalOpen} setDataForModal={setDataForModal} loading={loading}/>
+            <Menu done={done} setDone={setDone} setSelectedItemReject={setSelectedItemReject} items={menuItems} setReasonModalOpen={setReasonModalOpen} setModalOpen={setModalOpen} setDataForModal={setDataForModal} loading={loading}/>
           </section>
         </main>
       </div>

@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import './menu-style.css'
 import axios from "axios";
 
-const Menu = ({ items, setReasonModalOpen, setModalOpen, setDataForModal, loading }) => {
-  const [done, setDone] = useState([])
-
+const Menu = ({done, setDone, setSelectedItemReject, items, setReasonModalOpen, setModalOpen, setDataForModal, loading }) => {
 
   const handleAccept = (id) => {
-    setDone([...done, id]);
-  
     axios.get(`${process.env.REACT_APP_API_URL}/api/admin/newcampaignaccepted/${id}`,
       {
         headers: {
@@ -28,7 +24,11 @@ const Menu = ({ items, setReasonModalOpen, setModalOpen, setDataForModal, loadin
       console.log(error.response.data);
       alert(error.response.data.msg)
     });
+  }
 
+  const handleReject = (id) => {
+    setReasonModalOpen(true)
+    setSelectedItemReject(id)
   }
 
   return (
@@ -54,7 +54,7 @@ const Menu = ({ items, setReasonModalOpen, setModalOpen, setDataForModal, loadin
                   {/* <div style={{textAlign:'right', margin:'5px', }}><span style={{ padding:'5px 23px',borderRadius:30, color:'#4267B2', fontWeight:700}}>Likes: {like}</span></div> */}
                   {/* <ProgressBar progress={progress} height={25} /> */}
                   <button onClick={() => { handleAccept(campaign_id) }} className="inside-menu-button" style={{ border: '2px solid #04F004', background: 'rgb(4,240,4,0.07)' }} >Accept</button>
-                  <button onClick={() => { setDone([...done, item.campaign_id]); setReasonModalOpen(true) }} className="inside-menu-button" style={{ border: '2px solid #FF0000', background: 'rgba(255, 0, 0, .04)' }}>Reject</button>
+                  <button onClick={() => { handleReject(campaign_id) }} className="inside-menu-button" style={{ border: '2px solid #FF0000', background: 'rgba(255, 0, 0, .04)' }}>Reject</button>
                   <button onClick={() => { setModalOpen(true); setDataForModal(item); console.log(item) }} style={{ border: '1px solid', textDecoration: 'underline', cursor: 'pointer', padding: '0 1rem', height: '2rem', margin: '1rem', boxShadow: 'grey 9px 7px 4px 0px', borderRadius: '5px', background: 'transparent' }}>Click to see Details</button>
                 </div>
               </article>
