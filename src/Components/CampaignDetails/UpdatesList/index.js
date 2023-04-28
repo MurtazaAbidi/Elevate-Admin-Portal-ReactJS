@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import UpdateData from "./UpdateData";
 import './update-styling.css';
+import { capitalize } from "@material-ui/core";
 
 const today = new Date().toLocaleDateString();
 
 const Updates = ({ dataForModal }) => {
-  const [allUpdates, setAllUpdates] = useState(UpdateData)
+  const [allUpdates, setAllUpdates] = useState(dataForModal.milestones)
   const [addupdateData, setAddUpdateData] = useState(false);
 
   const submitHandler = (e) => {
@@ -24,7 +24,7 @@ const Updates = ({ dataForModal }) => {
       >
         {/* {addupdateData?<span>Add </span>:null} */}
         MileStones for{" "}
-        <span style={{ fontWeight: 900 }}>{dataForModal.title}</span>
+        <span style={{ fontWeight: 900 }}>{capitalize (dataForModal.campaign_title)}</span>
         {/* <span style={{fontWeight:700, textTransform:"capitalize"}}>{dataForModal.title} </span> */}
       </div>
       {addupdateData===false?(
@@ -56,12 +56,12 @@ const Updates = ({ dataForModal }) => {
 
           {allUpdates.map((element, index) => {
             return (
-              <tr>
+              <tr key={element.milestone_id}>
                 <td>{index + 1} </td>
-                <td>{element.title} </td>
-                <td sytle={{ textAlign: "left" }}>{element.description} </td>
-                <td>{element.percent}% </td>
-                <td>{element.Date} </td>
+                <td>{element.milestone_title} </td>
+                <td sytle={{ textAlign: "left" }}>{element.milestone_desc} </td>
+                <td>{((index+1)*100/allUpdates.length).toFixed(2)}% </td>
+                <td>{element.milestone_date.substr(0, 10)} </td>
               </tr>
             );
           })}

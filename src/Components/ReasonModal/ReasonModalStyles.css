@@ -66,3 +66,23 @@
     text-decoration: underline;
     opacity: 0.8;
 }
+
+.rejectedReason-topHeader{
+    display: flex;
+    justify-content: space-between;
+    background-color: #00073d;
+    padding: 10px 30px;
+    align-items: center;
+}
+
+.rejectedReason-topHeader h1{
+    margin: 0;
+}
+
+.rejectedReason-topHeader button{
+    font-size: 30px;
+    background-color: #00073d;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
