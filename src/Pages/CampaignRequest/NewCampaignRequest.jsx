@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Categories from "../../Components/CampaignRequest/Categories";
 import Menu from "../../Components/CampaignRequest/Menu";
-import items from "../../Components/CampaignRequest/dashboardData.js";
 import "./style.css";
 import Modal from "../../Components/CampaignDetails";
 import ReasonModal from "../../Components/ReasonModal";
@@ -61,7 +60,7 @@ const NewCampaignRequest = () => {
   return (
     <>
       {reasonModalOpen && <ReasonModal rejectionReasonData={rejectionReasonData} setRejectionReasonData={setRejectionReasonData} setReasonModalOpen={setReasonModalOpen} />}
-      {modalOpen && <Modal setOpenModal={setModalOpen} dataForModal={dataForModal} />}
+      {modalOpen && <Modal setOpenModal={setModalOpen} dataForModal={dataForModal} setDataForModal={setDataForModal}/>}
       <div className="myProduct-body">
         <main>
           <section className="section">
