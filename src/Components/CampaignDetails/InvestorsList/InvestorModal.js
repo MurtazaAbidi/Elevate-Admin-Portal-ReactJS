@@ -1,5 +1,5 @@
 import React from "react";
-import profilePic from '../../../Assets/profilepic.png'
+import profilePic from '../../../Assets/investorPic.png'
 
 const InvestorModal = ({setInvestorModalOpen, dataForInvestor}) => {
 
