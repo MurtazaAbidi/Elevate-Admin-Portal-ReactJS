@@ -1,7 +1,9 @@
 import React from "react";
-import investmentData from "./investmentData";
+// import "./investors-styling.css";
+// import investorData from "./investorsData";
 
-const InvestmentList = ({ dataForModal }) => {
+const InvestorsList = ({ dataForModal }) => {
+  console.log(dataForModal)
   return (
     <>
       <div
@@ -9,7 +11,7 @@ const InvestmentList = ({ dataForModal }) => {
       >
         Investors List for{" "}
         <span style={{ fontWeight: 700, textTransform: "capitalize" }}>
-          {dataForModal.title}{" "}
+          {dataForModal.campaign_title}{" "}
         </span>
       </div>
       <div
@@ -32,16 +34,25 @@ const InvestmentList = ({ dataForModal }) => {
             <th>Investor Email</th>
             <th>Investment Amount</th>
           </tr>
-          {investmentData.map((element, index) => {
+          {dataForModal.investors.map((element, index) => {
             return (
-              <tr>
+              <tr key={element.invest_id}>
                 <td>{index + 1}</td>
-                <td>{element.investorName}</td>
-                <td>{element.investorEmail}</td>
-                <td>Rs. {element.amount} /=</td>
+                <td>{element.investor_name}</td>
+                <td>{element.investor_email}</td>
+                <td>Rs. {element.invest_amount} /=</td>
               </tr>
             );
           })}
+          {dataForModal.investors.length===0 ?(
+              <tr >
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            ):null
+          }
         </table>
       </div>
       {/* </div> */}
@@ -49,4 +60,4 @@ const InvestmentList = ({ dataForModal }) => {
   );
 };
 
-export default InvestmentList;
+export default InvestorsList;
