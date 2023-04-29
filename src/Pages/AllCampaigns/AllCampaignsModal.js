@@ -47,7 +47,7 @@ function AllCampaignsModal({ setOpenModal, dataForModal, setDataForModal }) {
             X
           </button>
           </div>
-          <CampaignComments/>
+          <CampaignComments dataForModal={dataForModal} />
           </>
           ): (
             <>

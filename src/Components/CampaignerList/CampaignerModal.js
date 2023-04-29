@@ -1,4 +1,5 @@
 import React from "react";
+import profilePic from "../../Assets/profilepic.png"
 
 const CampaignerModal = ({setCampaignerModalOpen, dataForCampaigner}) => {
 
@@ -22,7 +23,7 @@ const CampaignerModal = ({setCampaignerModalOpen, dataForCampaigner}) => {
           
             <img
               style={{ height: 250, maxWidth: '17rem' }}
-              src={dataForCampaigner.profileImage}
+              src={dataForCampaigner.campaigner_image? dataForCampaigner.campaigner_image : profilePic}
               alt="ProfilePicture"
             />
           <div
@@ -33,7 +34,7 @@ const CampaignerModal = ({setCampaignerModalOpen, dataForCampaigner}) => {
               marginBottom: "0.1rem",
             }}
           >
-            {dataForCampaigner.name}
+            {dataForCampaigner.campaigner_name}
           </div>
           <p>Campaigner</p>
         </div>
@@ -55,18 +56,18 @@ const CampaignerModal = ({setCampaignerModalOpen, dataForCampaigner}) => {
               <div className="info_data">
                 <div className="data">
                   <h4>Email</h4>
-                  <p>{dataForCampaigner.email}</p>
+                  <p>{dataForCampaigner.campaigner_email}</p>
                 </div>
 
                 <div className="data">
                   <h4>Phone</h4>
-                  <p>{dataForCampaigner.phone}</p>
+                  <p>{dataForCampaigner.campaigner_contact}</p>
                 </div>
               </div>
               <div className="info_data">
                 <div className="data">
                   <h4>CNIC</h4>
-                  <p>{dataForCampaigner.cnic}</p>
+                  <p>{dataForCampaigner.campaigner_cnic}</p>
                 </div>
                 {/* <div className="data">
                   <h4>cell</h4>
@@ -77,7 +78,7 @@ const CampaignerModal = ({setCampaignerModalOpen, dataForCampaigner}) => {
                 <div className="data">
                   <h4>Office-Address</h4>
                   <p style={{ width: "25rem" }}>
-                    {dataForCampaigner.officeAddress}
+                    {dataForCampaigner.office_address}
                   </p>
                 </div>
               </div>
