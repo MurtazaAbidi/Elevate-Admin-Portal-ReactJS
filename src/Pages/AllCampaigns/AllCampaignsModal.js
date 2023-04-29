@@ -66,9 +66,9 @@ function AllCampaignsModal({ setOpenModal, dataForModal, setDataForModal }) {
         </div>
         <div className="body" style={{paddingTop:'2rem'}}>
           <img src={dataForModal.campaign_image} alt={dataForModal.campaign_title} style={{height:'15rem', paddingRight:'1rem'}} />
-          <p style={{textAlign:"left", height:'13rem', overflow:'hidden scroll', paddingRight:'1rem', fontSize:'1.3rem'}}>{dataForModal.desc}</p>
+          <p style={{textAlign:"left", height:'13rem', overflow:'hidden scroll', paddingRight:'1rem', fontSize:'1.3rem'}}>{dataForModal.campaign_description}</p>
         </div>
-          <div style={{  height:'1rem', fontSize:'1rem', textDecoration:'underline', padding:'5px 23px',borderRadius:30, color:'#4267B2', fontWeight:800, textAlign:'right'}}><span style={{cursor:'pointer'}} onClick={()=>{console.log("like button Clicked")}}>Likes: {dataForModal.like}</span></div>
+          <div style={{  height:'1rem', fontSize:'1rem', textDecoration:'underline', padding:'5px 23px',borderRadius:30, color:'#4267B2', fontWeight:800, textAlign:'right'}}><span style={{cursor:'pointer'}} onClick={()=>{console.log("like button Clicked")}}>Likes: {dataForModal.likes}</span></div>
           <ProgressBar progress={dataForModal.progress} height={22} />
           </>
         )}
