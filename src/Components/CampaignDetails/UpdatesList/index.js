@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import './update-styling.css';
-import { capitalize } from "@material-ui/core";
 
 const today = new Date().toLocaleDateString();
 
@@ -23,38 +22,39 @@ const Updates = ({ dataForModal }) => {
         style={{ fontSize: "2rem", textAlign: "center", paddingBottom: "1rem" }}
       >
         {/* {addupdateData?<span>Add </span>:null} */}
-        MileStones for{" "}
-        <span style={{ fontWeight: 900 }}>{capitalize (dataForModal.campaign_title)}</span>
+        Milestones for{" "}
+        <span style={{ fontWeight: 900 }}>{dataForModal.campaign_title}</span>
         {/* <span style={{fontWeight:700, textTransform:"capitalize"}}>{dataForModal.title} </span> */}
       </div>
       {addupdateData===false?(
-      <><div
+      <>
+      {/* <div
         style={{
           textAlign: "right",
           paddingRight: "2rem",
           marginBottom: "1rem",
         }}
       >
-        {/* <button
+        <button
           className="updates-button"
           onClick={()=>{
             setAddUpdateData(true);
           }}
         >
           Add Update
-        </button> */}
-      </div>
+        </button>
+      </div> */}
       <div style={{ overflowY: "scroll", minHeight: "17rem" }}>
         <table style={{ margin: "auto" }}>
           <tr id="header">
             <th>#</th>
-            <th>MileStone Title</th>
+            <th>Milestone Title</th>
             <th>Description</th>
             <th>Progress</th>
             <th>Date</th>
           </tr>
 
-          {allUpdates.map((element, index) => {
+          {allUpdates.length?allUpdates.map((element, index) => {
             return (
               <tr key={element.milestone_id}>
                 <td>{index + 1} </td>
@@ -64,7 +64,15 @@ const Updates = ({ dataForModal }) => {
                 <td>{element.milestone_date.substr(0, 10)} </td>
               </tr>
             );
-          })}
+          }):
+          <tr>
+                <td>-</td>
+                <td>-</td>
+                <td sytle={{ textAlign: "left" }}>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+          }
         </table>
       </div>
       </>):(
