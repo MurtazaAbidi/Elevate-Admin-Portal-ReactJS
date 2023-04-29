@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import campaignerData from "./campaignerData";
 import CampaignerModal from "./CampaignerModal";
 
 
-const CampaignerList = () => {
+const CampaignerList = ({campaigners}) => {
   const[campaignerModalOpen, setCampaignerModalOpen] = useState(false);
   const[dataForCampaigner, setDataforCampaigner] = useState({});
   return (
@@ -34,14 +33,14 @@ const CampaignerList = () => {
 
           </tr>
 
-          {campaignerData.map((element, index) => {
+          {campaigners.map((element, index) => {
             return (
               <tr onClick={()=>{setCampaignerModalOpen(true); setDataforCampaigner(element)}}>
                 <td>{index + 1}</td>
-                <td>{element.name}</td>
-                <td>{element.email}</td>
-                <td>{element.phone}</td>
-                <td>{element.cnic}</td>
+                <td>{element.campaigner_name}</td>
+                <td>{element.campaigner_email}</td>
+                <td>{element.campaigner_contact}</td>
+                <td>{element.campaigner_cnic}</td>
               </tr>
             );
           })}
