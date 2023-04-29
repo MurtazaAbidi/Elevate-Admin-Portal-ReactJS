@@ -1,4 +1,5 @@
 import React from "react";
+import profilePic from '../../../Assets/profilepic.png'
 
 const InvestorModal = ({setInvestorModalOpen, dataForInvestor}) => {
 
@@ -22,7 +23,7 @@ const InvestorModal = ({setInvestorModalOpen, dataForInvestor}) => {
           
             <img
               style={{ height: 250, maxWidth: '17rem' }}
-              src={dataForInvestor.profileImage}
+              src={dataForInvestor.investor_image?dataForInvestor.investor_image:profilePic}
               alt="ProfilePicture"
             />
           <div
@@ -33,7 +34,7 @@ const InvestorModal = ({setInvestorModalOpen, dataForInvestor}) => {
               marginBottom: "0.1rem",
             }}
           >
-            {dataForInvestor.name}
+            {dataForInvestor.investor_name}
           </div>
           <p>Investor</p>
         </div>
@@ -55,32 +56,32 @@ const InvestorModal = ({setInvestorModalOpen, dataForInvestor}) => {
               <div className="info_data">
                 <div className="data">
                   <h4>Email</h4>
-                  <p>{dataForInvestor.email}</p>
+                  <p>{dataForInvestor.investor_email}</p>
                 </div>
 
                 <div className="data">
                   <h4>Phone</h4>
-                  <p>{dataForInvestor.phone}</p>
+                  <p>{dataForInvestor.investor_contact}</p>
                 </div>
               </div>
               <div className="info_data">
                 <div className="data">
                   <h4>CNIC</h4>
-                  <p>{dataForInvestor.cnic}</p>
+                  <p>{dataForInvestor.investor_cnic}</p>
                 </div>
                 {/* <div className="data">
                   <h4>cell</h4>
                   <p>0001-213-998761</p>
                 </div> */}
               </div>
-              <div className="info_data">
+              {/* <div className="info_data">
                 <div className="data">
                   <h4>Office-Address</h4>
                   <p style={{ width: "25rem" }}>
-                    {dataForInvestor.officeAddress}
+                    {dataForInvestor.office_address}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
           <div className="projects">
@@ -88,7 +89,7 @@ const InvestorModal = ({setInvestorModalOpen, dataForInvestor}) => {
             <div className="projects_data">
               <div className="data">
                 <h4>Overall Investments</h4>
-                <p>Rs. {dataForInvestor.investmentAmount}/=</p>
+                <p>Rs. {dataForInvestor.total_investment}/=</p>
               </div>
             </div>
           </div>

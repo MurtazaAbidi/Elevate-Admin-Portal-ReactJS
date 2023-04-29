@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import InvestorModal from "./InvestorModal";
 import "./investors-styling.css";
-import investorData from "./investorsData";
 
-const InvestorsList = () => {
+const InvestorsList = ({investors}) => {
   const[investorModalOpen, setInvestorModalOpen] = useState(false);
   const[dataForInvestor, setDataforInvestor] = useState({});
   return (
@@ -34,14 +33,14 @@ const InvestorsList = () => {
 
           </tr>
 
-          {investorData.map((element, index) => {
+          {investors.map((element, index) => {
             return (
               <tr onClick={()=>{setInvestorModalOpen(true); setDataforInvestor(element)}}>
                 <td>{index + 1}</td>
-                <td>{element.name}</td>
-                <td>{element.email}</td>
-                <td>{element.phone}</td>
-                <td>{element.cnic}</td>
+                <td>{element.investor_name}</td>
+                <td>{element.investor_email}</td>
+                <td>{element.investor_contact}</td>
+                <td>{element.investor_cnic}</td>
               </tr>
             );
           })}
