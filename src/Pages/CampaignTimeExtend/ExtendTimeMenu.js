@@ -9,17 +9,17 @@ const ExtendTimeMenu = ({ items, setModalOpen, setDataForModal ,setReasonModalOp
         if (done.includes(item.id)) {
           return null;
         }
-        const { id, title, img, desc, like, progress } = item;
+        const { campaign_id, campaign_title, campaigner_name, campaign_type, campaign_image, campaign_description, id, title, img, desc, likes, progress } = item;
         return (
           <>
-          <article style={{marginLeft:'-5rem', cursor:"revert"}} key={id} className="menu-item">
-            <img src={img} alt={title} className="photo" />
+          <article style={{marginLeft:'-5rem', cursor:"revert"}} key={campaign_id} className="menu-item">
+            <img src={campaign_image} alt={campaign_title} className="photo" />
             <div style={{width:'30rem'}} className="item-info">
               <header>
-                <h4>{title}</h4>
-                <h4 className="price">{item.category}<span style={{ padding:'0 1rem',borderRadius:30, color:'#4267B2', fontWeight:700}}>(Likes: {like})</span></h4>
+                <h4>{campaign_title}</h4>
+                <h4 className="price">{campaign_type}<span style={{ padding:'0 1rem',borderRadius:30, color:'#4267B2', fontWeight:700}}>(Likes: {likes})</span></h4>
               </header>
-              <p className="item-text">{desc}</p>
+              <p className="item-text">{campaign_description}</p>
               {/* <div style={{textAlign:'right', margin:'5px', }}><span style={{ padding:'5px 23px',borderRadius:30, color:'#4267B2', fontWeight:700}}>Likes: {like}</span></div> */}
               {/* <ProgressBar progress={progress} height={25} /> */}
               <button onClick={()=>{setDone([...done, item.id]);}} className="inside-menu-button" style={{border:'2px solid #04F004', background:'rgb(4,240,4,0.07)'}}>Accept</button>
