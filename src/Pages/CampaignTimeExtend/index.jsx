@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Categories from "../../Components/CampaignRequest/Categories";
-import ReasonModal from "../../Components/ReasonModal";
 import ExtendTimeMenu from "./ExtendTimeMenu";
 import ExtendTimeModal from "./ExtendTimeModal";
 import axios from "axios";
+import ReasonModalTime from "./ReasonModal";
 
 const allCategories = ["all", "equity", "reward", "profit", "donation"];
 
@@ -16,6 +16,8 @@ const CampaignTimeExtendRequest = () => {
   const [dataForModal, setDataForModal] = useState({});
   const [rejectionReasonData, setRejectionReasonData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedItemReject, setSelectedItemReject] = useState(null)
+  const [done, setDone] = useState([])
   const categories = allCategories;
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const CampaignTimeExtendRequest = () => {
         alert(error.response.data.msg);
         setLoading(false);
       });
-  }, [])
+  }, [done])
 
   const filterItems = (category) => {
     setActiveCategory(category);
@@ -56,9 +58,9 @@ const CampaignTimeExtendRequest = () => {
   };
   return (
     <>
-      {reasonModalOpen && <ReasonModal rejectionReasonData={rejectionReasonData} setRejectionReasonData={setRejectionReasonData} setReasonModalOpen={setReasonModalOpen} />}
+      {reasonModalOpen && <ReasonModalTime done={done} setDone={setDone} selectedItemReject={selectedItemReject} rejectionReasonData={rejectionReasonData} setRejectionReasonData={setRejectionReasonData} setReasonModalOpen={setReasonModalOpen} />}
       {modalOpen && (
-        <ExtendTimeModal setOpenModal={setModalOpen} dataForModal={dataForModal} />
+        <ExtendTimeModal setOpenModal={setModalOpen} dataForModal={dataForModal} setDataForModal={setDataForModal} />
       )}
       <div className="myProduct-body">
         <main>
@@ -74,6 +76,10 @@ const CampaignTimeExtendRequest = () => {
               filterItems={filterItems}
             />
             <ExtendTimeMenu
+              done={done} 
+              setDone={setDone} 
+              setSelectedItemReject={setSelectedItemReject} 
+              loading={loading}
               items={menuItems}
               setModalOpen={setModalOpen}
               setDataForModal={setDataForModal}

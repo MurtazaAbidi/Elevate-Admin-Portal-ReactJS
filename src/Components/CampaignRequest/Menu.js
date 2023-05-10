@@ -18,6 +18,7 @@ const Menu = ({done, setDone, setSelectedItemReject, items, setReasonModalOpen, 
       if (response.status === 200) {
         console.log (response.data)
         setDone([...done, id]);
+        alert (response.data)
       }
     })
     .catch(function (error) {
