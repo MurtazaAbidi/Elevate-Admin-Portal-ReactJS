@@ -59,7 +59,7 @@ const AllCampaigns = () => {
           <section className="section">
             <div className="title">
               {/* <img src={logo} alt="logo" className="logo" /> */}
-              <h2 style={{ fontSize: "3rem" }}>Dashboard</h2>
+              <h2 style={{ fontSize: "3rem" }}>All Campaigns</h2>
               <div className="underline"></div>
             </div>
             <Categories

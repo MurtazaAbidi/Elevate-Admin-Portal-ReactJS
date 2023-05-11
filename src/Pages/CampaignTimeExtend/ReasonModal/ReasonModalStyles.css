@@ -1,0 +1,88 @@
+.reasonModal-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0008;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.reasonModal-innerContainer {
+    height: 55vh;
+    width: 50vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.reasonModal-innerContainer form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+.reasonModal-textAreaStyling {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.reasonModal-textAreaStyling :nth-child(2) {
+    border: 2px solid brown;
+    position: relative;
+    bottom: 4.5vw;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.reasonModal-textAreaStyling textarea {
+    width: 80%;
+    padding: 1rem;
+    /* margin: 0 auto; */
+}
+
+.reasonModal-innerContainer form button {
+    background-color: #00073d;
+    color: white;
+    width: 95%;
+    margin: 1rem 1rem;
+    align-self: center;
+    height: 2.8rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 4px;
+}
+
+.reasonModal-innerContainer button:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.rejectedReason-topHeader{
+    display: flex;
+    justify-content: space-between;
+    background-color: #00073d;
+    padding: 10px 30px;
+    align-items: center;
+}
+
+.rejectedReason-topHeader h1{
+    margin: 0;
+}
+
+.rejectedReason-topHeader button{
+    font-size: 30px;
+    background-color: #00073d;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

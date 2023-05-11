@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import CampaignComments from "../../Components/CampaignDetails/CampaignComments";
-import Updates from "../../Components/CampaignDetails/UpdatesList";
+import CampaignComments from "../CampaignDetails/CampaignComments";
+import Updates from "../CampaignDetails/UpdatesList";
 import InvestmentList from "./InvestmentList";
 import ProgressBar from "./ProgressBar";
 import axios from "axios";
 
-function ExtendTimeModal({ setOpenModal, dataForModal, setDataForModal }) {
+function AllCampaignsModal({ setOpenModal, dataForModal, setDataForModal }) {
   const [invertorsFlag, setInvestorFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
   const [commentsFlag, setCommentsFlag] = useState(false);
+
   useEffect(()=>{
     axios.get(
       // body: JSON.stringify({
@@ -23,13 +24,15 @@ function ExtendTimeModal({ setOpenModal, dataForModal, setDataForModal }) {
     )
     .then(function (response) {
       console.log(response.data);
-      setDataForModal({...dataForModal, milestones: response.data.milestones, investors: response.data.investors , comments:response.data.comments})
+      setDataForModal({...dataForModal, milestones: response.data.milestones, investors: response.data.investors , comments:response.data.comments, rejected: response.data.rejected})
     })
     .catch(function (error) {
       console.log(error.response.data.msg);
       alert(error.response.data.msg);
     });
   },[dataForModal.campaign_id])
+
+
   return (
     <div style={{marginTop:'-2rem'}} className="modalBackground">
       <div className="modalContainer" style={{boxShadow:'#000000 0px 0px 40px 10px'}}>
@@ -44,7 +47,7 @@ function ExtendTimeModal({ setOpenModal, dataForModal, setDataForModal }) {
             X
           </button>
           </div>
-          <CampaignComments dataForModal={dataForModal}/>
+          <CampaignComments dataForModal={dataForModal} />
           </>
           ): (
             <>
@@ -58,9 +61,8 @@ function ExtendTimeModal({ setOpenModal, dataForModal, setDataForModal }) {
           </button>
         </div>
         <div className="modaltitle">
-          <span style={{textDecoration:'underline'}}>{dataForModal.campaign_title} </span>
-          <span style={{paddingLeft:'1.5rem', fontSize:'1.3rem', fontWeight:'100', color:'#c59d5f'}}>{(dataForModal.campaign_type).toUpperCase()}</span>
-          <span style={{paddingLeft:'1.5rem', fontSize:'1.3rem', fontWeight:'100', color:'red'}}>(Days Left: {dataForModal.days_left.days})</span>
+          <span style={{textDecoration:'underline'}}>{dataForModal.campaign_title}  </span>
+          <span style={{paddingLeft:'1.5rem', fontSize:'1.3rem', fontWeight:'100', color:'#c59d5f'}}>(Days left: {dataForModal.days_left.days} days)</span>
         </div>
         <div className="body" style={{paddingTop:'2rem'}}>
           <img src={dataForModal.campaign_image} alt={dataForModal.campaign_title} style={{height:'15rem', paddingRight:'1rem'}} />
@@ -81,10 +83,10 @@ function ExtendTimeModal({ setOpenModal, dataForModal, setDataForModal }) {
             >
             Cancel
           </button>
-          <button onClick={()=>{setUpdateFlag(true)}}>MileStones</button>
+          <button onClick={()=>{setUpdateFlag(true)}}>Milestone</button>
           <button style={{backgroundColor:'white', color:' cornflowerblue', border:'1px solid'}} onClick={()=>{setInvestorFlag(true)}}>Investors</button>
           <button style={{backgroundColor:'white', color:' cornflowerblue', border:'1px solid'}} onClick={()=>{setCommentsFlag(true)}}>Comments</button>
-            {dataForModal.hoursLeft<=30 && dataForModal.progress!==100?<><button style={{width:'17rem', backgroundColor:'crimson' }}>Time-Extend Request</button></>:null}
+            {/* {dataForModal.hoursLeft<=30 && dataForModal.progress!==100?<><button style={{width:'17rem', backgroundColor:'crimson' }}>Time-Extend Request</button></>:null} */}
             </>
             ): (invertorsFlag === true || updateFlag=== true) ?
             <button style={{
@@ -99,4 +101,4 @@ function ExtendTimeModal({ setOpenModal, dataForModal, setDataForModal }) {
   );
 }
 
-export default ExtendTimeModal;
+export default AllCampaignsModal;

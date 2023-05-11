@@ -1,20 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Categories from "../../Components/CampaignRequest/Categories";
-import items from "../../Components/CampaignRequest/TimeExtendData";
-import ReasonModal from "../../Components/ReasonModal";
 import ExtendTimeMenu from "./ExtendTimeMenu";
 import ExtendTimeModal from "./ExtendTimeModal";
+import axios from "axios";
+import ReasonModalTime from "./ReasonModal";
 
-const allCategories = ["all", ...new Set(items.map((item) => item.category))];
+const allCategories = ["all", "equity", "reward", "profit", "donation"];
 
 const CampaignTimeExtendRequest = () => {
   const [reasonModalOpen, setReasonModalOpen] = useState(false);
-  const [menuItems, setMenuItems] = useState(items);
+  const [items, setItems] = useState([])
+  const [menuItems, setMenuItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [dataForModal, setDataForModal] = useState({});
   const [rejectionReasonData, setRejectionReasonData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedItemReject, setSelectedItemReject] = useState(null)
+  const [done, setDone] = useState([])
   const categories = allCategories;
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get(
+      // body: JSON.stringify({
+      `${process.env.REACT_APP_API_URL}/api/admin/timeextensionrequests`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        withCredentials: true,
+      }
+    )
+      .then(function (response) {
+        console.log(response.data);
+        setMenuItems(response.data)
+        setItems(response.data)
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error.response.data.msg);
+        alert(error.response.data.msg);
+        setLoading(false);
+      });
+  }, [done])
 
   const filterItems = (category) => {
     setActiveCategory(category);
@@ -22,14 +52,15 @@ const CampaignTimeExtendRequest = () => {
       setMenuItems(items);
       return;
     }
-    const newItems = items.filter((item) => item.category === category);
+
+    const newItems = items.filter((item) => item.campaign_type === category);
     setMenuItems(newItems);
   };
   return (
     <>
-      {reasonModalOpen && <ReasonModal rejectionReasonData={rejectionReasonData} setRejectionReasonData={setRejectionReasonData} setReasonModalOpen={setReasonModalOpen} />}
+      {reasonModalOpen && <ReasonModalTime done={done} setDone={setDone} selectedItemReject={selectedItemReject} rejectionReasonData={rejectionReasonData} setRejectionReasonData={setRejectionReasonData} setReasonModalOpen={setReasonModalOpen} />}
       {modalOpen && (
-        <ExtendTimeModal setOpenModal={setModalOpen} dataForModal={dataForModal} />
+        <ExtendTimeModal setOpenModal={setModalOpen} dataForModal={dataForModal} setDataForModal={setDataForModal} />
       )}
       <div className="myProduct-body">
         <main>
@@ -45,6 +76,10 @@ const CampaignTimeExtendRequest = () => {
               filterItems={filterItems}
             />
             <ExtendTimeMenu
+              done={done} 
+              setDone={setDone} 
+              setSelectedItemReject={setSelectedItemReject} 
+              loading={loading}
               items={menuItems}
               setModalOpen={setModalOpen}
               setDataForModal={setDataForModal}

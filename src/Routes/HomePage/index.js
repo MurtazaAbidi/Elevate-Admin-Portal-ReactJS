@@ -6,6 +6,10 @@ import InvestorProfilesList from "../../Pages/InvestorProfilesList";
 import CampaignerProfilesList from "../../Pages/CampaignerProfilesList";
 import AllCampaigns from "../../Pages/AllCampaigns";
 import CampaignTimeExtendRequest from "../../Pages/CampaignTimeExtend";
+import RejectedCampaignRequest from "../../Pages/RejectedCampaignRequest";
+import AcceptedCampaignRequest from "../../Pages/AcceptedCampaignRequest";
+import AcceptedTimeRequest from "../../Pages/AcceptedTimeRequest";
+import RejectedNewCampaignsRequest from "../../Pages/RejectedNewCampaignsRequest";
 
 const HomePage = () => {
   return (
@@ -15,6 +19,10 @@ const HomePage = () => {
           <Route path="/" element={<AllCampaigns />} />
           <Route path="/campaignrequest" element={<NewCampaignRequest />} />
           <Route path="/campaigntimerequest" element={<CampaignTimeExtendRequest />} />
+          <Route path="/campaignaccepted" element={<AcceptedCampaignRequest />} />
+          <Route path="/campaigntimeaccepted" element={<AcceptedTimeRequest />} />
+          <Route path="/campaignrejected" element={<RejectedNewCampaignsRequest />} />
+          <Route path="/campaigntimerejected" element={<RejectedCampaignRequest />} />
           <Route path="/campaignerlist" element={<CampaignerProfilesList />} />
           <Route path="/investorlist" element={<InvestorProfilesList />} />
           <Route path="*" element={<h1> not found</h1>} />
