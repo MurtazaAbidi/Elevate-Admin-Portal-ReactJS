@@ -10,6 +10,7 @@ import { BiLogOut } from "react-icons/bi";
 import { BsClipboardCheck, BsClipboardX } from "react-icons/bs";
 import SidebarMenu from "./SidebarMenu";
 import "./sidebarstyle.css";
+import axios from "axios";
 const routes = [
   {
     path: "/",
@@ -181,28 +182,28 @@ const SideBar = ({ children }) => {
               <button
                 className="sidebar-logout-btn"
                 onClick={() => {
-                  window.location.reload(false);
-                  // axios.get(
-                  //     `http://localhost:3300/api/logout`,
-                  //     {
-                  //       headers: {
-                  //         "Content-Type": "application/json",
-                  //         Accept: "application/json",
-                  //       },
-                  //       withCredentials: true,
-                  //     }
-                  //   )
-                  //   .then(function (response) {
-                  //     console.log(response);
-                  //     if (response.status === 200) {
-                  //       console.log(response);
-                  //       window.location.reload(false);
-                  //     }
-                  //   })
-                  //   .catch(function (error) {
-                  //     console.log(error.response.data.msg);
-                  //     alert(error.response.data.msg);
-                  //   });
+                  // window.location.reload(false);
+                  axios.get(
+                      `http://localhost:3300/api/admin/logout`,
+                      {
+                        headers: {
+                          "Content-Type": "application/json",
+                          Accept: "application/json",
+                        },
+                        withCredentials: true,
+                      }
+                    )
+                    .then(function (response) {
+                      console.log(response);
+                      if (response.status === 200) {
+                        console.log(response);
+                        window.location.reload(false);
+                      }
+                    })
+                    .catch(function (error) {
+                      console.log(error.response.data.msg);
+                      alert(error.response.data.msg);
+                    });
                 }}
               >
                 <span style={{ paddingRight: "1rem" }}>

@@ -14,7 +14,7 @@ const RejectedTimeRequestsList = ({ campaignsData }) => {
         <div
           style={{ fontSize: "2rem", textAlign: "center", paddingBottom: "1rem" }}
         ><span style={{ fontWeight: 700, textTransform: "capitalize" }}>
-            Rejected Time Extend Requests
+            Rejected Time Extension Requests
           </span>
         </div>
         <div
@@ -37,8 +37,8 @@ const RejectedTimeRequestsList = ({ campaignsData }) => {
               return (
                 <tr onClick={() => { setModalOpen(true); setDataForModal(element) }}>
                   <td>{index + 1}</td>
-                  <td>{element.campaign_name}</td>
-                  <td>{element.rejected_reason}</td>
+                  <td>{element.campaign_title}</td>
+                  <td>{element.rejected_message}</td>
                   <td>{element.campaigner_name}</td>
                 </tr>
               );
