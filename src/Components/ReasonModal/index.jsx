@@ -1,8 +1,10 @@
 import React from 'react'
 import './ReasonModalStyles.css'
 import axios from 'axios';
+import { useSnackBar } from '../../Hooks/useSnakeBar';
 
 const ReasonModal = ({ done, setDone, selectedItemReject, rejectionReasonData, setReasonModalOpen, setRejectionReasonData }) => {
+  const showPopUp = useSnackBar();
   const handleSubmit = (e) => {
     e.preventDefault();
     let send_data_to_api = {
@@ -24,11 +26,12 @@ const ReasonModal = ({ done, setDone, selectedItemReject, rejectionReasonData, s
         setReasonModalOpen(false);
         setDone([...done, selectedItemReject])
         setRejectionReasonData([...rejectionReasonData, e.target.rejectionReason.value])
+        showPopUp(response.data, "success");
       }
     })
       .catch(function (error) {
         console.log(error.response.data);
-        alert(error.response.data.msg)
+        showPopUp(error.response.data.msg, "error");
       });
   }
   return (

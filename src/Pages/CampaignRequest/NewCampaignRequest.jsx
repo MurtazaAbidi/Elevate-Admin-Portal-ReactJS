@@ -5,10 +5,12 @@ import "./style.css";
 import Modal from "../../Components/CampaignDetails";
 import ReasonModal from "../../Components/ReasonModal";
 import axios from "axios";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
 
 const allCategories = ["all", "equity", "reward", "profit", "donation"];
 
 const NewCampaignRequest = () => {
+  const showPopUp = useSnackBar();
   const [items, setItems] = useState([])
   const [menuItems, setMenuItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("");
@@ -43,7 +45,8 @@ const NewCampaignRequest = () => {
       })
       .catch(function (error) {
         console.log(error.response.data.msg);
-        alert(error.response.data.msg);
+        showPopUp(error.response.data.msg, "error");
+
         setLoading(false);
       });
   }, [])

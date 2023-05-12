@@ -22,7 +22,7 @@ const AddPicturesAndVideo = ({images, setImages}) => {
       console.log(validImageFiles)
       return;
     }
-    alert("Selected images are not of valid type!");
+    showPopUp("Selected images are not of valid type!", "error");
   };
 
   useEffect(() => {

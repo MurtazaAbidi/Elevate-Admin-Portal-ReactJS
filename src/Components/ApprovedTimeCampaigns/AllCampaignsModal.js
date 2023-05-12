@@ -4,8 +4,11 @@ import Updates from "../CampaignDetails/UpdatesList";
 import InvestmentList from "./InvestmentList";
 import ProgressBar from "./ProgressBar";
 import axios from "axios";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
+
 
 function AllCampaignsModal({ setOpenModal, dataForModal, setDataForModal }) {
+  const showPopUp = useSnackBar();
   const [invertorsFlag, setInvestorFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
   const [commentsFlag, setCommentsFlag] = useState(false);
@@ -28,7 +31,7 @@ function AllCampaignsModal({ setOpenModal, dataForModal, setDataForModal }) {
     })
     .catch(function (error) {
       console.log(error.response.data.msg);
-      alert(error.response.data.msg);
+      showPopUp(error.response.data.msg, "error");
     });
   },[dataForModal.campaign_id])
 

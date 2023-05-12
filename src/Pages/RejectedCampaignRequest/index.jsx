@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import RejectedTimeRequestsList from '../../Components/RejectedCampaignsList';
+import { useSnackBar } from '../../Hooks/useSnakeBar';
 
 const RejectedCampaignRequest = () => {
   const [loading, setLoading] = useState(false);
   const [rejectedCampaigns, setRejectedCampaignsCampaigns] = useState([]);
+  const showPopUp = useSnackBar();
   useEffect(() => {
     setLoading(true);
     axios.get(
@@ -25,7 +27,7 @@ const RejectedCampaignRequest = () => {
       })
       .catch(function (error) {
         console.log(error.response.data.msg);
-        alert(error.response.data.msg);
+        showPopUp(error.response.data.msg, "error");
         setLoading(false);
       });
   }, [])
