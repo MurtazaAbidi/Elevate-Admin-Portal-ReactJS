@@ -7,10 +7,13 @@ import {
   deleteComment as deleteCommentApi,
 } from "../api";
 import axios from "axios";
+import { useSnackBar } from "../../../../Hooks/useSnakeBar";
 
 const Comments = ({ currentUserId, dataForModal }) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
+  const showPopUp = useSnackBar();
+
   const rootComments = backendComments.filter(
     (backendComment) => backendComment.parentId === null
   );
@@ -53,7 +56,7 @@ const Comments = ({ currentUserId, dataForModal }) => {
       })
       .catch(function (error) {
         console.log(error.response.data.msg);
-        alert(error.response.data.msg);
+        showPopUp(error.response.data.msg, "error");
       });
 
   };

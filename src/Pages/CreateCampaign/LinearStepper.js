@@ -500,13 +500,14 @@ const LinaerStepper = () => {
                   .then(function (response) {
                     console.log(response);
                     if (response.status === 200) {
-                      alert(response.data);
+                      showPopUp(response.data, "success");
 
                     }
                   })
                   .catch(function (error) {
                     console.log(error.response.data.msg);
-                    alert(error.response.data.msg);
+                    showPopUp(error.response.data.msg, "error");
+
                   });
               }}
             >

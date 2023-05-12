@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import RejectedNewCampaigns from '../../Components/RejectedNewCampaigns';
+import { useSnackBar } from '../../Hooks/useSnakeBar';
 
 const RejectedNewCampaignsRequest = () => {
+  const showPopUp = useSnackBar();
   const [loading, setLoading] = useState(false);
   const [rejectedCampaigns, setRejectedCampaignsCampaigns] = useState([]);
   useEffect(() => {
@@ -25,7 +27,7 @@ const RejectedNewCampaignsRequest = () => {
       })
       .catch(function (error) {
         console.log(error.response.data.msg);
-        alert(error.response.data.msg);
+        showPopUp(error.response.data.msg, "error");
         setLoading(false);
       });
   }, [])

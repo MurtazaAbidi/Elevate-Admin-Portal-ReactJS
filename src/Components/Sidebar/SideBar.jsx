@@ -11,6 +11,7 @@ import { BsClipboardCheck, BsClipboardX } from "react-icons/bs";
 import SidebarMenu from "./SidebarMenu";
 import "./sidebarstyle.css";
 import axios from "axios";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
 const routes = [
   {
     path: "/",
@@ -83,6 +84,7 @@ const routes = [
 const SideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const showPopUp = useSnackBar();
 
   const showAnimation = {
     hidden: {
@@ -202,7 +204,8 @@ const SideBar = ({ children }) => {
                     })
                     .catch(function (error) {
                       console.log(error.response.data.msg);
-                      alert(error.response.data.msg);
+                      showPopUp(error.response.data.msg, "error");
+
                     });
                 }}
               >

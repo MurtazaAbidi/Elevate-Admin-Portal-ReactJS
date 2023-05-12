@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import "../index.css";
 import axios from "axios";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
 <link
   href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap"
   ref="stylesheet"
@@ -12,6 +13,8 @@ const Login = ({ setJWTAuthentication }) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFromErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const showPopUp = useSnackBar();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +53,7 @@ const Login = ({ setJWTAuthentication }) => {
         })
         .catch(function (error) {
           console.log(error.response.data.msg);
-          alert(error.response.data.msg)
+          showPopUp(error.response.data.msg, "error");
         });
     }
     // if (formValues.email==='admin@gmail.com' && formValues.password==='admin123') setJWTAuthentication(true)

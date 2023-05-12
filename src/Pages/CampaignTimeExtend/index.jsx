@@ -4,6 +4,7 @@ import ExtendTimeMenu from "./ExtendTimeMenu";
 import ExtendTimeModal from "./ExtendTimeModal";
 import axios from "axios";
 import ReasonModalTime from "./ReasonModal";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
 
 const allCategories = ["all", "equity", "reward", "profit", "donation"];
 
@@ -19,6 +20,7 @@ const CampaignTimeExtendRequest = () => {
   const [selectedItemReject, setSelectedItemReject] = useState(null)
   const [done, setDone] = useState([])
   const categories = allCategories;
+  const showPopUp = useSnackBar();
 
   useEffect(() => {
     setLoading(true);
@@ -41,7 +43,7 @@ const CampaignTimeExtendRequest = () => {
       })
       .catch(function (error) {
         console.log(error.response.data.msg);
-        alert(error.response.data.msg);
+        showPopUp(error.response.data.msg, "error");
         setLoading(false);
       });
   }, [done])

@@ -1,9 +1,10 @@
 import React from "react";
 import './menu-style.css'
 import axios from "axios";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
 
 const Menu = ({done, setDone, setSelectedItemReject, items, setReasonModalOpen, setModalOpen, setDataForModal, loading }) => {
-
+  const showPopUp = useSnackBar();
   const handleAccept = (id) => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/admin/newcampaignaccepted/${id}`,
       {
@@ -18,13 +19,13 @@ const Menu = ({done, setDone, setSelectedItemReject, items, setReasonModalOpen, 
       if (response.status === 200) {
         console.log (response.data)
         setDone([...done, id]);
-        alert (response.data)
+        showPopUp(response.data, "success");
       }
     })
     .catch(function (error) {
       console.log(error.response.data);
-      alert(error.response.data.msg)
-    });
+      showPopUp(error.response.data.msg, "error");
+     });
   }
 
   const handleReject = (id) => {

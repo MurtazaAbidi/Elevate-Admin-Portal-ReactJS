@@ -30,7 +30,7 @@ const Profile = () => {
   const changeImageHandler = (e) => {
     const file = e.target.files[0];
     if (!file.type.match(imageMimeType)) {
-      alert("Image mime type is not valid");
+      showPopUp("Image mime type is not valid", "error");
       return;
     }
     setFile(file);

@@ -4,11 +4,13 @@ import Updates from "../CampaignDetails/UpdatesList";
 import InvestmentList from "./InvestmentList";
 import ProgressBar from "./ProgressBar";
 import axios from "axios";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
 
 function CampaignRejectModal({ setOpenModal, dataForModal, setDataForModal }) {
   const [invertorsFlag, setInvestorFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
   const [commentsFlag, setCommentsFlag] = useState(false);
+  const showPopUp = useSnackBar();
 
   useEffect(()=>{
     axios.get(
@@ -28,7 +30,8 @@ function CampaignRejectModal({ setOpenModal, dataForModal, setDataForModal }) {
     })
     .catch(function (error) {
       console.log(error.response.data.msg);
-      alert(error.response.data.msg);
+      showPopUp(error.response.data.msg, "error");
+
     });
   },[dataForModal.campaign_id])
 

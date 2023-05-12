@@ -4,11 +4,14 @@ import InvestorsList from "./InvestorsList";
 import "./Modal.css";
 import Updates from "./UpdatesList";
 import axios from "axios";
+import { useSnackBar } from "../../Hooks/useSnakeBar";
 
 function Modal({ setOpenModal, dataForModal, setDataForModal }) {
   const [invertorsFlag, setInvestorFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
   const [commentsFlag, setCommentsFlag] = useState(false);
+  const showPopUp = useSnackBar();
+
 
   useEffect(()=>{
     axios.get(
@@ -28,7 +31,8 @@ function Modal({ setOpenModal, dataForModal, setDataForModal }) {
     })
     .catch(function (error) {
       console.log(error.response.data.msg);
-      alert(error.response.data.msg);
+      showPopUp(error.response.data.msg, "error");
+
     });
   },[dataForModal.campaign_id])
 
